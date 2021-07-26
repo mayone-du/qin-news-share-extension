@@ -4,7 +4,37 @@ import { useCreateNews } from "./useCreateNews";
 import { useGetTodayNews } from "./useGetTodayNews";
 
 export const App = () => {
+  // ソートするために時刻をformatする関数
+  const changeDateFormat = useCallback((createdAt: string): string => {
+    const parsedTimestamp = Date.parse(createdAt);
+    const newDate = new Date(parsedTimestamp);
+    const newHours =
+      newDate.getHours() < 10 ? "0" + newDate.getHours() : newDate.getHours();
+    const newMinutes =
+      newDate.getMinutes() < 10
+        ? "0" + newDate.getMinutes()
+        : newDate.getMinutes();
+    const fixedDate = `${newDate.getFullYear()}-${newHours}-${newMinutes}`;
+
+    return fixedDate;
+  }, []);
+  // 今日のニュースを取得
   const { news } = useGetTodayNews();
+
+  // ニュースを時刻順にソート
+  // const sortedNews = news?.data.todayNews.edges.sort().reverse();
+  const newsCopy = news?.data.todayNews && [...news.data.todayNews.edges];
+  const sortedNewsData = newsCopy?.sort((a, b) => {
+    if (
+      changeDateFormat(a.node.createdAt) < changeDateFormat(b.node.createdAt)
+    ) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
+
+  // ニュース作成
   const {
     inputNewsUrl,
     inputUserName,
@@ -15,6 +45,7 @@ export const App = () => {
     isCreating,
   } = useCreateNews();
 
+  // 受け取ったDateTime型の情報を見やすくフォーマットする関数
   const fixDateFormat = useCallback((createdAt: string): string => {
     const parsedTimestamp = Date.parse(createdAt);
     const newDate = new Date(parsedTimestamp);
@@ -104,6 +135,7 @@ export const App = () => {
           シェア
         </button>
       </form>
+      {console.log(newsCopy)}
 
       <section>
         <h2>今日のニュース</h2>
@@ -134,7 +166,8 @@ export const App = () => {
         )}
         {/* ニュース一覧 */}
         <ul className="bl_newsList">
-          {news?.data.todayNews.edges.map((news, index) => {
+          {/* {news?.data.todayNews.edges.map((news, index) => { */}
+          {sortedNewsData?.map((news, index) => {
             return (
               <li className="bl_newsList_news" key={index}>
                 <a
@@ -152,7 +185,9 @@ export const App = () => {
                     </span>
                     <div className="newsSubInfo">
                       <span className="contributorName">
-                        {news.node.contributorName}
+                        {news.node.contributorName
+                          ? news.node.contributorName
+                          : "匿名"}
                       </span>
                       <span className="createdAt">
                         {fixDateFormat(news.node.createdAt)}
@@ -186,7 +221,9 @@ export const App = () => {
                       </span>
                       <div className="newsSubInfo">
                         <span className="contributorName">
-                          {newsData.data.createNews.news.contributorName}
+                          {newsData.data.createNews.news.contributorName
+                            ? newsData.data.createNews.news.contributorName
+                            : "匿名"}
                         </span>
                         <span className="createdAt">
                           {fixDateFormat(

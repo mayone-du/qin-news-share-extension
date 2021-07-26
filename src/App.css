@@ -88,9 +88,11 @@ section {
 }
 .bl_newsList_news .title {
   color: blue;
-  font-size: 1.1em;
+  font-size: 1.2em;
+  font-weight: bold;
 }
 .bl_newsList_news .summary {
+  font-size: 1.1em;
   color: gray;
 }
 /* 投稿者とシェアされた時間 */
@@ -98,8 +100,10 @@ section {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 0.9em;
   width: 100%;
+}
+.bl_newsList_news .contributorName {
+  font-weight: bold;
 }
 .bl_newsList_news a:hover {
   background-color: lightblue;
@@ -108,8 +112,6 @@ section {
 /* ローディング */
 .bl_loading {
   position: absolute;
-  /* width: 100vw; */
-  /* height: 100vh; */
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
