@@ -1,2 +1,6 @@
-// This file is ran as a background script
-console.log("Hello from background script!")
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  sendResponse({ newsCount: request.newsCount });
+  // バッジ
+  chrome.browserAction.setBadgeText({ text: request.newsCount });
+  chrome.browserAction.setBadgeBackgroundColor({ color: [198, 5, 82, 1] });
+});
