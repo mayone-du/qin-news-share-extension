@@ -35,8 +35,29 @@ export const App = () => {
     return fixedDate;
   }, []);
 
+  const handleReload = useCallback(() => {
+    location.reload();
+  }, []);
+
   return (
     <div className="ly_container">
+      {/* リロードボタン */}
+      <button className="bl_reloadButton" onClick={handleReload}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="bl_refreshButton"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+          />
+        </svg>
+      </button>
       <h1>Qin夜活ニュースシェア</h1>
       {/* ニュース作成（シェア）中のローディング画面 */}
       {isCreating && (
@@ -79,7 +100,9 @@ export const App = () => {
           onChange={handleChangeUserName}
           placeholder="ユーザーネーム"
         />
-        <button type="submit">シェア</button>
+        <button className="bl_utilButton" type="submit">
+          シェア
+        </button>
       </form>
 
       <section>

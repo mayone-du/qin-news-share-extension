@@ -18,7 +18,18 @@ input {
   width: 100%;
   font-size: 1.1em;
 }
-button {
+
+section {
+  margin-top: 30px;
+}
+
+.ly_container {
+  padding: 20px 10px;
+  width: 400px;
+}
+
+/* 汎用ボタン */
+.bl_utilButton {
   display: block;
   border: 1px solid black;
   padding: 10px 20px;
@@ -27,16 +38,22 @@ button {
   font-size: 1.1em;
   transition: 0.15s;
 }
-button:hover {
+.bl_utilButton:hover {
   background: lightgray;
 }
-section {
-  margin-top: 30px;
-}
 
-.ly_container {
-  padding: 20px 10px;
-  width: 400px;
+/* リロードボタン */
+.bl_reloadButton {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 20px;
+  height: 20px;
+  display: block;
+  cursor: pointer;
+}
+.bl_reloadButton svg {
+  color: black;
 }
 
 /* ニュースリスト */
