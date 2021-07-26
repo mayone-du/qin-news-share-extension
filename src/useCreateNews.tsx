@@ -33,6 +33,7 @@ export const useCreateNews = () => {
         !inputNewsUrl.includes("http") ||
         !inputNewsUrl.includes("https")
       ) {
+        alert("URLを入力してください。");
         return;
       }
       const now = new Date().getTime();

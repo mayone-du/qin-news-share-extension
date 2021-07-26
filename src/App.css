@@ -47,3 +47,31 @@ button {
 .bl_newsList_news a:hover {
   background-color: lightblue;
 }
+
+/* loading */
+.bl_loading {
+  position: absolute;
+  background-color: rgba(212, 212, 212, 0.3);
+  width: 100vw;
+  height: 100vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: spin 1s linear infinite;
+}
+.bl_loading svg {
+  width: 30px;
+  height: 30px;
+}
+.bl_loading circle {
+  opacity: 0.25;
+}
+.bl_loading path {
+  opacity: 0.75;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
