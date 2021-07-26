@@ -5,6 +5,7 @@ export const useCreateNews = () => {
   const [inputUserName, setInputUserName] = useState("");
 
   useEffect(() => {
+    // storageからユーザー名を取得
     chrome.storage.sync.get("QinUserName", (value) => {
       setInputUserName(value.QinUserName);
     });
@@ -20,12 +21,9 @@ export const useCreateNews = () => {
   // ニュースの作成
   const handleCreateNews = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // newsの追加
     try {
-      // ユーザー名の保存
-      chrome.storage.sync.set({ QinUserName: inputUserName }, () => {
-        console.log("ユーザー名を保存しました。");
-      });
+      // storageにユーザー名を保存
+      chrome.storage.sync.set({ QinUserName: inputUserName });
 
       // URLのチェック
       if (
@@ -33,7 +31,7 @@ export const useCreateNews = () => {
         !inputNewsUrl.includes("http") ||
         !inputNewsUrl.includes("https")
       ) {
-        alert("URLを入力してください。");
+        alert("正しい形式でURLを入力してください。");
         return;
       }
       const now = new Date().getTime();

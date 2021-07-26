@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "./App.css";
 
 type NewsData = {
   data: {
@@ -57,22 +56,8 @@ export const useGetTodayNews = () => {
 
           // ニュースが存在する場合
           setNews(json);
-          // ニュースのカウントを表示
           // backgroundへニュースの数を送信
-          chrome.runtime.sendMessage(
-            { newsCount: newsCount.toString() },
-            (response) => {
-              // 受け取ったレスポンスをcontentへ送信
-              console.log(response);
-              //   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-              //     chrome.tabs.sendMessage(
-              //       tabs[0].id,
-              //       JSON.stringify({ contents: response.newsCount }),
-              //       (response) => {}
-              //     );
-              //   });
-            }
-          );
+          chrome.runtime.sendMessage({ newsCount: newsCount.toString() });
         });
     } catch (error) {
       alert(error);

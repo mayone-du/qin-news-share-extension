@@ -16,6 +16,7 @@ export const App = () => {
   return (
     <div className="ly_container">
       <h1>Qin夜活ニュースシェア</h1>
+      {/* ニュース作成フォーム */}
       <form onSubmit={handleCreateNews}>
         <input
           type="url"
@@ -59,6 +60,7 @@ export const App = () => {
           </svg>
         </div>
       )}
+      {/* ニュース一覧 */}
       <ul className="bl_newsList">
         {news?.data.todayNews.edges.map((news, index) => {
           return (
