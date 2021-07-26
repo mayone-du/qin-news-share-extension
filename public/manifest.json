@@ -7,8 +7,6 @@
     "48": "icon_48.png"
   },
     "permissions": [
-      "activeTab",
-      "tabs",
       "background",
       "storage"
     ],
