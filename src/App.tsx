@@ -16,11 +16,17 @@ export const App = () => {
   return (
     <div className="ly_container">
       <form onSubmit={handleCreateNews}>
-        <input type="url" value={inputNewsUrl} onChange={handleChangeNewsUrl} />
+        <input
+          type="url"
+          value={inputNewsUrl}
+          onChange={handleChangeNewsUrl}
+          placeholder="https://google.com/news/..."
+        />
         <input
           type="text"
           value={inputUserName}
           onChange={handleChangeUserName}
+          placeholder="ユーザーネーム"
         />
         <button type="submit">シェア</button>
       </form>

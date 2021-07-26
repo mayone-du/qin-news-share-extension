@@ -84,6 +84,7 @@ export const useCreateNews = () => {
             if (json.data.createNews === null) {
               throw new Error("既に登録済みの可能性があります。");
             }
+            setInputNewsUrl("");
           } catch (error) {
             alert(error.message);
           }
