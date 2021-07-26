@@ -1,6 +1,6 @@
 {
-  "name": "Chrome Extension Boilerplate",
-  "description": "Chrome Extension boilerplate created with React Typescript.",
+  "name": "Qinニュースシェア",
+  "description": "Qinニュースシェアアプリの拡張機能です。",
   "manifest_version": 2,
   "version": "1.0.0",
   "icons": {
@@ -8,6 +8,12 @@
     "48": "icon48.png",
     "128": "icon128.png"
   },
+    "permissions": [
+      "activeTab",
+      "tabs",
+      "background",
+      "storage"
+    ],
   "browser_action": {
     "default_icon": {
       "16": "icon16.png",
@@ -24,7 +30,7 @@
   "content_scripts": [
     {
       "matches": [
-        "*://*/*"
+        "<all_urls>"
       ],
       "js": [
         "content.js"
