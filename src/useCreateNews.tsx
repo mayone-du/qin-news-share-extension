@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-
+import type { CreatedNewsData } from "./types";
 export const useCreateNews = () => {
   const [inputNewsUrl, setInputNewsUrl] = useState("");
   const [inputUserName, setInputUserName] = useState("");
-
+  // const [createdNews, setCreatedNews] = useState<CreatedNewsData[] | []>([]);
+  const [createdNews, setCreatedNews] = useState<any>([]);
+  const [isCreating, setIsCreating] = useState(false);
   useEffect(() => {
     // storageからユーザー名を取得
     chrome.storage.sync.get("QinUserName", (value) => {
@@ -34,6 +36,7 @@ export const useCreateNews = () => {
         alert("正しい形式でURLを入力してください。");
         return;
       }
+      setIsCreating(true);
       const now = new Date().getTime();
       fetch("https://news-share-backend.herokuapp.com/graphql/", {
         // fetch("http://localhost:8000/graphql/", {
@@ -63,6 +66,9 @@ export const useCreateNews = () => {
                   title
                   url
                   summary
+                  imagePath
+                  createdAt
+                  contributorName
                 }
               }
             }
@@ -77,17 +83,26 @@ export const useCreateNews = () => {
         .then((response) => {
           return response.json();
         })
-        .then((json) => {
+        .then((json: CreatedNewsData) => {
           // エラーハンドリング
           try {
             if (json.data.createNews === null) {
               throw new Error("既に登録済みの可能性があります。");
             }
+            // TODO: type
+            setCreatedNews((prev: any) => {
+              const newsList = prev;
+              prev.push(json);
+              return newsList;
+            });
             setInputNewsUrl("");
+            setIsCreating(false);
           } catch (error) {
+            setIsCreating(false);
             alert(error.message);
           }
           // TODO: 新規追加したニュースを表示
+          // location.reload();
         });
     } catch (error) {
       alert(error);
@@ -99,5 +114,7 @@ export const useCreateNews = () => {
     handleChangeNewsUrl,
     handleChangeUserName,
     handleCreateNews,
+    createdNews,
+    isCreating,
   };
 };

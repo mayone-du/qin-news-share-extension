@@ -11,6 +11,8 @@ export const App = () => {
     handleChangeNewsUrl,
     handleChangeUserName,
     handleCreateNews,
+    createdNews,
+    isCreating,
   } = useCreateNews();
 
   const fixDateFormat = useCallback((createdAt: string): string => {
@@ -36,6 +38,32 @@ export const App = () => {
   return (
     <div className="ly_container">
       <h1>Qin夜活ニュースシェア</h1>
+      {/* ニュース作成（シェア）中のローディング画面 */}
+      {isCreating && (
+        <div className="bl_loading">
+          <svg
+            className="mr-3 -ml-1 w-5 h-5 text-black animate-spin"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            ></circle>
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
+        </div>
+      )}
+
       {/* ニュース作成フォーム */}
       <form onSubmit={handleCreateNews}>
         <input
@@ -56,7 +84,7 @@ export const App = () => {
 
       <section>
         <h2>今日のニュース</h2>
-        {/* loading */}
+        {/* ローディング画面 */}
         {news === undefined && (
           <div className="bl_loading">
             <svg
@@ -112,6 +140,42 @@ export const App = () => {
               </li>
             );
           })}
+          {/* 追加したニュース */}
+          {/* TODO: 上と同じ要素なのでリファクタする */}
+          {createdNews.length !== 0 &&
+            createdNews.map((newsData: any, index: any) => {
+              return (
+                <li className="bl_newsList_news" key={index}>
+                  <a
+                    href={newsData.data.createNews.news.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img src={newsData.data.createNews.news.imagePath} alt="" />
+                    <div className="newsInfo">
+                      <span className="title">
+                        {newsData.data.createNews.news.title}
+                      </span>
+                      <span className="summary">
+                        {newsData.data.createNews.news.summary === ""
+                          ? "概要はありません。"
+                          : newsData.data.createNews.news.summary}
+                      </span>
+                      <div className="newsSubInfo">
+                        <span className="contributorName">
+                          {newsData.data.createNews.news.contributorName}
+                        </span>
+                        <span className="createdAt">
+                          {fixDateFormat(
+                            newsData.data.createNews.news.createdAt
+                          )}
+                        </span>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+              );
+            })}
         </ul>
       </section>
     </div>

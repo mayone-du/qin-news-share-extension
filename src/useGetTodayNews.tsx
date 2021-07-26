@@ -1,23 +1,6 @@
 import { useEffect, useState } from "react";
+import type { NewsData } from "./types";
 
-type NewsData = {
-  data: {
-    todayNews: {
-      edges: [
-        {
-          node: {
-            title: string;
-            url: string;
-            summary: string;
-            imagePath: string;
-            createdAt: string;
-            contributorName: string;
-          };
-        }
-      ];
-    };
-  };
-};
 export const useGetTodayNews = () => {
   const [news, setNews] = useState<NewsData>();
   useEffect(() => {
