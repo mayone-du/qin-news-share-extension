@@ -9,6 +9,7 @@ type NewsData = {
           node: {
             title: string;
             url: string;
+            summary: string;
           };
         }
       ];

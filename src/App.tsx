@@ -15,6 +15,7 @@ export const App = () => {
 
   return (
     <div className="ly_container">
+      <h1>Qin夜活ニュースシェア</h1>
       <form onSubmit={handleCreateNews}>
         <input
           type="url"
@@ -30,11 +31,16 @@ export const App = () => {
         />
         <button type="submit">シェア</button>
       </form>
+
+      <h2>今日のニュース</h2>
       <ul className="bl_newsList">
         {news?.data.todayNews.edges.map((news, index) => {
           return (
-            <li className="bl_news" key={index}>
-              {news.node.title}
+            <li className="bl_newsList_news" key={index}>
+              <a href={news.node.url} target="_blank" rel="noopener noreferrer">
+                <span className="title">{news.node.title}</span>
+                <span className="summary">{news.node.summary}</span>
+              </a>
             </li>
           );
         })}
