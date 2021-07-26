@@ -9,6 +9,9 @@ type NewsData = {
             title: string;
             url: string;
             summary: string;
+            imagePath: string;
+            createdAt: string;
+            contributorName: string;
           };
         }
       ];
@@ -34,6 +37,9 @@ export const useGetTodayNews = () => {
                     title
                     url
                     summary
+                    imagePath
+                    createdAt
+                    contributorName
                   }
                 }
               }

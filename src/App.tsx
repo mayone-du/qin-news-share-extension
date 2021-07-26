@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import "./App.css";
 import { useCreateNews } from "./useCreateNews";
 import { useGetTodayNews } from "./useGetTodayNews";
@@ -12,6 +12,26 @@ export const App = () => {
     handleChangeUserName,
     handleCreateNews,
   } = useCreateNews();
+
+  const fixDateFormat = useCallback((createdAt: string): string => {
+    const parsedTimestamp = Date.parse(createdAt);
+    const newDate = new Date(parsedTimestamp);
+    const newMonth =
+      newDate.getMonth() + 1 < 10
+        ? "0" + (newDate.getMonth() + 1)
+        : newDate.getMonth() + 1;
+    const newDay =
+      newDate.getDate() < 10 ? "0" + newDate.getDate() : newDate.getDate();
+    const newHours =
+      newDate.getHours() < 10 ? "0" + newDate.getHours() : newDate.getHours();
+    const newMinutes =
+      newDate.getMinutes() < 10
+        ? "0" + newDate.getMinutes()
+        : newDate.getMinutes();
+    const fixedDate = `${newMonth}/${newDay} ${newHours}:${newMinutes}`;
+
+    return fixedDate;
+  }, []);
 
   return (
     <div className="ly_container">
@@ -71,8 +91,23 @@ export const App = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <span className="title">{news.node.title}</span>
-                  <span className="summary">{news.node.summary}</span>
+                  <img src={news.node.imagePath} alt="" />
+                  <div className="newsInfo">
+                    <span className="title">{news.node.title}</span>
+                    <span className="summary">
+                      {news.node.summary === ""
+                        ? "概要はありません。"
+                        : news.node.summary}
+                    </span>
+                    <div className="newsSubInfo">
+                      <span className="contributorName">
+                        {news.node.contributorName}
+                      </span>
+                      <span className="createdAt">
+                        {fixDateFormat(news.node.createdAt)}
+                      </span>
+                    </div>
+                  </div>
                 </a>
               </li>
             );

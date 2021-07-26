@@ -8,11 +8,12 @@ h2 {
   font-size: 16px;
   font-weight: bold;
   text-align: center;
+  padding: 10px;
 }
 
 input {
   display: block;
-  border: 1px solid black;
+  border: 1px solid lightgray;
   padding: 10px;
   width: 100%;
   font-size: 1.1em;
@@ -20,7 +21,7 @@ input {
 button {
   display: block;
   border: 1px solid black;
-  padding: 5px 10px;
+  padding: 10px 20px;
   margin: 10px auto;
   border-radius: 20px;
   font-size: 1.1em;
@@ -41,16 +42,32 @@ section {
 /* ニュースリスト */
 .bl_newsList {
   border: 1px solid lightgray;
+  max-height: 300px;
+  overflow-y: scroll;
 }
 /* ニュース */
 .bl_newsList_news a {
   padding: 5px;
-  display: block;
+  display: flex;
+  width: 100%;
+  align-items: center;
   transition: 0.15s;
-  border: 1px solid black;
+  border: 1px solid lightgray;
+}
+.bl_newsList_news img {
+  display: block;
+  object-fit: cover;
+  width: 30%;
+  height: auto;
+  margin-right: 5px;
 }
 .bl_newsList_news span {
   display: block;
+}
+.bl_newsList .newsInfo {
+  width: 70%;
+  padding-right: 5px;
+  padding-left: 5px;
 }
 .bl_newsList_news .title {
   color: blue;
@@ -59,6 +76,14 @@ section {
 .bl_newsList_news .summary {
   color: gray;
 }
+/* 投稿者とシェアされた時間 */
+.bl_newsList_news .newsSubInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.9em;
+  width: 100%;
+}
 .bl_newsList_news a:hover {
   background-color: lightblue;
 }
@@ -66,9 +91,8 @@ section {
 /* ローディング */
 .bl_loading {
   position: absolute;
-  background-color: rgba(212, 212, 212, 0.3);
-  width: 100vw;
-  height: 100vh;
+  /* width: 100vw; */
+  /* height: 100vh; */
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
