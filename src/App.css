@@ -7,13 +7,15 @@ h1 {
 h2 {
   font-size: 16px;
   font-weight: bold;
+  text-align: center;
 }
 
 input {
   display: block;
   border: 1px solid black;
-  padding: 5px 10px;
+  padding: 10px;
   width: 100%;
+  font-size: 1.1em;
 }
 button {
   display: block;
@@ -21,16 +23,28 @@ button {
   padding: 5px 10px;
   margin: 10px auto;
   border-radius: 20px;
+  font-size: 1.1em;
+  transition: 0.15s;
+}
+button:hover {
+  background: lightgray;
+}
+section {
+  margin-top: 30px;
 }
 
 .ly_container {
+  padding: 20px 10px;
   width: 400px;
 }
 
+/* ニュースリスト */
 .bl_newsList {
-  border: 1px solid lightpink;
+  border: 1px solid lightgray;
 }
+/* ニュース */
 .bl_newsList_news a {
+  padding: 5px;
   display: block;
   transition: 0.15s;
   border: 1px solid black;
@@ -40,6 +54,7 @@ button {
 }
 .bl_newsList_news .title {
   color: blue;
+  font-size: 1.1em;
 }
 .bl_newsList_news .summary {
   color: gray;
@@ -48,7 +63,7 @@ button {
   background-color: lightblue;
 }
 
-/* loading */
+/* ローディング */
 .bl_loading {
   position: absolute;
   background-color: rgba(212, 212, 212, 0.3);
@@ -59,8 +74,8 @@ button {
   transform: translate(-50%, -50%);
 }
 .bl_loading svg {
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
   animation: spin 1s linear infinite;
 }
 .bl_loading circle {
