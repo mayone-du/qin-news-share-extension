@@ -4,9 +4,7 @@
   "manifest_version": 2,
   "version": "1.0.0",
   "icons": {
-    "16": "icon16.png",
-    "48": "icon48.png",
-    "128": "icon128.png"
+    "48": "icon_48.png"
   },
     "permissions": [
       "activeTab",
@@ -16,7 +14,6 @@
     ],
   "browser_action": {
     "default_icon": {
-      "16": "icon16.png",
       "48": "icon48.png"
     },
     "default_popup": "popup.html"
