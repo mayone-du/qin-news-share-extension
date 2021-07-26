@@ -57,11 +57,11 @@ button {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  animation: spin 1s linear infinite;
 }
 .bl_loading svg {
   width: 30px;
   height: 30px;
+  animation: spin 1s linear infinite;
 }
 .bl_loading circle {
   opacity: 0.25;
