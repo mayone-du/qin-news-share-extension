@@ -8,7 +8,8 @@
   },
     "permissions": [
       "background",
-      "storage"
+      "storage",
+      "tabs"
     ],
   "browser_action": {
     "default_icon": {

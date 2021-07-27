@@ -37,6 +37,7 @@ export const App = () => {
   // ニュース作成
   const {
     inputNewsUrl,
+    newsUrlSuggestion,
     inputUserName,
     handleChangeNewsUrl,
     handleChangeUserName,

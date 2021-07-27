@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import type { CreatedNewsData } from "./types";
 export const useCreateNews = () => {
   const [inputNewsUrl, setInputNewsUrl] = useState("");
+  const [newsUrlSuggestion, setNewsUrlSuggestion] = useState("");
   const [inputUserName, setInputUserName] = useState("");
   // const [createdNews, setCreatedNews] = useState<CreatedNewsData[] | []>([]);
   const [createdNews, setCreatedNews] = useState<any>([]);
@@ -11,10 +12,24 @@ export const useCreateNews = () => {
     chrome.storage.sync.get("QinUserName", (value) => {
       setInputUserName(value.QinUserName);
     });
+    // 現在開いているページのURLを取得してサジェスト表示
+    chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
+      const currentPageUrl = tabs[0].url;
+      // 開いているページのURLがあり、ovice以外のページだったら表示
+      if (currentPageUrl && !currentPageUrl.includes("qin.ovice.in")) {
+        setInputNewsUrl(currentPageUrl);
+      }
+    });
   }, []);
 
   const handleChangeNewsUrl = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // サジェストがある場合
+    // if (newsUrlSuggestion.length > 0) {
+    // setInputNewsUrl(newsUrlSuggestion);
+    // setNewsUrlSuggestion("");
+    // } else {
     setInputNewsUrl(e.target.value);
+    // }
   };
   const handleChangeUserName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputUserName(e.target.value);
@@ -110,6 +125,7 @@ export const useCreateNews = () => {
   };
   return {
     inputNewsUrl,
+    newsUrlSuggestion,
     inputUserName,
     handleChangeNewsUrl,
     handleChangeUserName,
