@@ -1,8 +1,8 @@
 import React, { useCallback } from "react";
+import { Toaster } from "react-hot-toast";
 import "./App.css";
 import { useCreateNews } from "./useCreateNews";
 import { useGetTodayNews } from "./useGetTodayNews";
-
 export const App = () => {
   // ソートするために時刻をformatする関数
   const changeDateFormat = useCallback((createdAt: string): string => {
@@ -73,6 +73,7 @@ export const App = () => {
 
   return (
     <div className="ly_container">
+      <Toaster toastOptions={{ duration: 2500 }} />
       {/* リロードボタン */}
       <button className="bl_reloadButton" onClick={handleReload}>
         <svg

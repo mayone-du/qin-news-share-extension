@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import type { CreatedNewsData } from "./types";
 export const useCreateNews = () => {
   const [inputNewsUrl, setInputNewsUrl] = useState("");
@@ -15,9 +16,13 @@ export const useCreateNews = () => {
     // 現在開いているページのURLを取得してサジェスト表示
     chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
       const currentPageUrl = tabs[0].url;
+      const currentPageTitle = tabs[0].title;
       // 開いているページのURLがあり、ovice以外のページだったら表示
       if (currentPageUrl && !currentPageUrl.includes("qin.ovice.in")) {
         setInputNewsUrl(currentPageUrl);
+        // 現在のページのURLであることを伝える
+        currentPageTitle &&
+          toast.success(`"${currentPageTitle}" のURLを入力しました`);
       }
     });
   }, []);
