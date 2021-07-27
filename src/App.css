@@ -37,6 +37,7 @@ section {
 }
 .bl_newsUrlInputWrapper input {
   /* 削除ボタンの長さ分引く */
+  border-bottom: none;
   width: calc(100% - 40px);
 }
 
@@ -46,7 +47,6 @@ section {
   align-items: center;
   justify-content: center;
   border-top: 1px solid lightgray;
-  border-bottom: 1px solid lightgray;
   border-right: 1px solid lightgray;
   /* inputと同じ高さにする */
   width: 40px;
