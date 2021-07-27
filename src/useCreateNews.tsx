@@ -99,22 +99,24 @@ export const useCreateNews = () => {
         .then((json: CreatedNewsData) => {
           // エラーハンドリング
           try {
+            // エラーの場合
             if (json.data.createNews === null) {
               throw new Error("既に登録済みの可能性があります。");
             }
             // TODO: type
+            // 作成したニュースを表示
             setCreatedNews((prev: any) => {
               const newsList = prev;
               prev.push(json);
               return newsList;
             });
+            toast.success("ニュースがシェアされました!");
             setInputNewsUrl("");
             setIsCreating(false);
           } catch (error) {
             setIsCreating(false);
             alert(error.message);
           }
-          // TODO: 新規追加したニュースを表示
           // location.reload();
         });
     } catch (error) {

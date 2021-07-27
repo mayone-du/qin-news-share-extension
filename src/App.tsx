@@ -193,40 +193,8 @@ export const App = () => {
         )}
         {/* ニュース一覧 */}
         <ul className="bl_newsList">
-          {/* {news?.data.todayNews.edges.map((news, index) => { */}
-          {sortedNewsData?.map((news, index) => {
-            return (
-              <li className="bl_newsList_news" key={index}>
-                <a
-                  href={news.node.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img src={news.node.imagePath} alt="" />
-                  <div className="newsInfo">
-                    <span className="title">{news.node.title}</span>
-                    <span className="summary">
-                      {news.node.summary === ""
-                        ? "概要はありません。"
-                        : news.node.summary}
-                    </span>
-                    <div className="newsSubInfo">
-                      <span className="contributorName">
-                        {news.node.contributorName
-                          ? news.node.contributorName
-                          : "匿名"}
-                      </span>
-                      <span className="createdAt">
-                        {fixDateFormat(news.node.createdAt)}
-                      </span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-            );
-          })}
           {/* 追加したニュース */}
-          {/* TODO: 上と同じ要素なのでリファクタする */}
+          {/* TODO: 下と同じ要素なのでリファクタする */}
           {createdNews.length !== 0 &&
             createdNews.map((newsData: any, index: any) => {
               return (
@@ -263,6 +231,40 @@ export const App = () => {
                 </li>
               );
             })}
+
+          {/* 既存のニュース */}
+          {/* {news?.data.todayNews.edges.map((news, index) => { */}
+          {sortedNewsData?.map((news, index) => {
+            return (
+              <li className="bl_newsList_news" key={index}>
+                <a
+                  href={news.node.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img src={news.node.imagePath} alt="" />
+                  <div className="newsInfo">
+                    <span className="title">{news.node.title}</span>
+                    <span className="summary">
+                      {news.node.summary === ""
+                        ? "概要はありません。"
+                        : news.node.summary}
+                    </span>
+                    <div className="newsSubInfo">
+                      <span className="contributorName">
+                        {news.node.contributorName
+                          ? news.node.contributorName
+                          : "匿名"}
+                      </span>
+                      <span className="createdAt">
+                        {fixDateFormat(news.node.createdAt)}
+                      </span>
+                    </div>
+                  </div>
+                </a>
+              </li>
+            );
+          })}
         </ul>
       </section>
     </div>
