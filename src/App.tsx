@@ -37,7 +37,7 @@ export const App = () => {
   // ニュース作成
   const {
     inputNewsUrl,
-    newsUrlSuggestion,
+    setInputNewsUrl,
     inputUserName,
     handleChangeNewsUrl,
     handleChangeUserName,
@@ -69,6 +69,10 @@ export const App = () => {
 
   const handleReload = useCallback(() => {
     location.reload();
+  }, []);
+
+  const handleUrlClear = useCallback(() => {
+    setInputNewsUrl("");
   }, []);
 
   return (
@@ -120,13 +124,34 @@ export const App = () => {
 
       {/* ニュース作成フォーム */}
       <form onSubmit={handleCreateNews}>
-        <input
-          type="url"
-          value={inputNewsUrl}
-          onChange={handleChangeNewsUrl}
-          placeholder="https://google.com/news/..."
-          autoFocus
-        />
+        <div className="bl_newsUrlInputWrapper">
+          <input
+            type="url"
+            value={inputNewsUrl}
+            onChange={handleChangeNewsUrl}
+            placeholder="https://google.com/news/..."
+            autoFocus
+          />
+          <button
+            className="bl_deleteInputValueButton"
+            type="button"
+            onClick={handleUrlClear}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </button>
+        </div>
         <input
           type="text"
           value={inputUserName}

@@ -3,7 +3,6 @@ import toast from "react-hot-toast";
 import type { CreatedNewsData } from "./types";
 export const useCreateNews = () => {
   const [inputNewsUrl, setInputNewsUrl] = useState("");
-  const [newsUrlSuggestion, setNewsUrlSuggestion] = useState("");
   const [inputUserName, setInputUserName] = useState("");
   // const [createdNews, setCreatedNews] = useState<CreatedNewsData[] | []>([]);
   const [createdNews, setCreatedNews] = useState<any>([]);
@@ -28,13 +27,7 @@ export const useCreateNews = () => {
   }, []);
 
   const handleChangeNewsUrl = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // サジェストがある場合
-    // if (newsUrlSuggestion.length > 0) {
-    // setInputNewsUrl(newsUrlSuggestion);
-    // setNewsUrlSuggestion("");
-    // } else {
     setInputNewsUrl(e.target.value);
-    // }
   };
   const handleChangeUserName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputUserName(e.target.value);
@@ -130,7 +123,7 @@ export const useCreateNews = () => {
   };
   return {
     inputNewsUrl,
-    newsUrlSuggestion,
+    setInputNewsUrl,
     inputUserName,
     handleChangeNewsUrl,
     handleChangeUserName,

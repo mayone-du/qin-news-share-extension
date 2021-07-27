@@ -14,9 +14,11 @@ h2 {
 input {
   display: block;
   border: 1px solid lightgray;
-  padding: 10px;
+  height: 40px;
   width: 100%;
   font-size: 1.1em;
+  padding-right: 10px;
+  padding-left: 10px;
 }
 
 section {
@@ -26,6 +28,33 @@ section {
 .ly_container {
   padding: 20px 10px;
   width: 400px;
+}
+
+/* フォームのURL用のinputのwrapper */
+.bl_newsUrlInputWrapper {
+  display: flex;
+  align-items: center;
+}
+.bl_newsUrlInputWrapper input {
+  /* 削除ボタンの長さ分引く */
+  width: calc(100% - 40px);
+}
+
+/* URL削除ボタン */
+.bl_deleteInputValueButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+  border-right: 1px solid lightgray;
+  /* inputと同じ高さにする */
+  width: 40px;
+  height: 40px;
+}
+.bl_deleteInputValueButton svg {
+  width: 20px;
+  height: 20px;
 }
 
 /* 汎用ボタン */
