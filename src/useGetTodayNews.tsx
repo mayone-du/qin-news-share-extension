@@ -3,6 +3,7 @@ import type { NewsData } from "./types";
 
 export const useGetTodayNews = () => {
   const [news, setNews] = useState<NewsData>();
+  const [isNewsGetting, setIsNewsGetting] = useState(true);
   useEffect(() => {
     try {
       fetch("https://news-share-backend.herokuapp.com/graphql/", {
@@ -38,6 +39,7 @@ export const useGetTodayNews = () => {
           const newsCount: number = json.data.todayNews.edges.length;
           // ニュースがまだない場合
           if (newsCount === 0) {
+            setIsNewsGetting(false);
             // backgroundへニュースの数を送信
             chrome.runtime.sendMessage({ newsCount: newsCount.toString() });
             return;
@@ -47,10 +49,12 @@ export const useGetTodayNews = () => {
           setNews(json);
           // backgroundへニュースの数を送信
           chrome.runtime.sendMessage({ newsCount: newsCount.toString() });
+          setIsNewsGetting(false);
         });
     } catch (error) {
+      setIsNewsGetting(false);
       alert(error);
     }
   }, []);
-  return { news };
+  return { news, isNewsGetting };
 };

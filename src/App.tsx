@@ -19,7 +19,7 @@ export const App = () => {
     return fixedDate;
   }, []);
   // 今日のニュースを取得
-  const { news } = useGetTodayNews();
+  const { news, isNewsGetting } = useGetTodayNews();
 
   // ニュースを時刻順にソート
   // const sortedNews = news?.data.todayNews.edges.sort().reverse();
@@ -167,7 +167,7 @@ export const App = () => {
       <section>
         <h2>今日のニュース</h2>
         {/* ローディング画面 */}
-        {news === undefined && (
+        {isNewsGetting && (
           <div className="bl_loading">
             <svg
               className="mr-3 -ml-1 w-5 h-5 text-black animate-spin"
