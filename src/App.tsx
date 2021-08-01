@@ -193,6 +193,9 @@ export const App = () => {
         )}
         {/* ニュース一覧 */}
         <ul className="bl_newsList">
+          {news === undefined && !isNewsGetting && !isCreating && (
+            <li>今日のニュースはまだありません。</li>
+          )}
           {/* 追加したニュース */}
           {/* TODO: 下と同じ要素なのでリファクタする */}
           {createdNews.length !== 0 &&
