@@ -113,7 +113,7 @@ export const useCreateNews = () => {
             toast.success("ニュースがシェアされました!");
             setInputNewsUrl("");
             setIsCreating(false);
-          } catch (error) {
+          } catch (error: any) {
             setIsCreating(false);
             alert(error.message);
           }
